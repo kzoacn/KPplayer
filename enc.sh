@@ -1,0 +1,1 @@
+ffmpeg -i f.flv -f rawvideo - | ./kpenc -s 1000x562 -q 6 --qmin 1 --qmax 4 |x264 --input-res 1000x562 --profile high --level 5.1 --tune stillimage --crf 22 --colormatrix bt709 --me dia --merange 0 -o out.mkv -
