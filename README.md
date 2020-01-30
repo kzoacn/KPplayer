@@ -2,14 +2,15 @@
 
 ## Requirements
 
-(ffmpeg)[https://ffmpeg.org/]
+[ffmpeg](https://ffmpeg.org/)
 
-(streamlink)[https://github.com/streamlink/streamlink], plz use the latest version
+
+[streamlink](https://github.com/streamlink/streamlink), plz use the latest version
 
 
 ## Compile
 
-```
+``` bash
 sudo apt-get install libglib2.0-dev libfftw3-dev
 sudo apt-get install git ffmpeg x264 mplayer
 
@@ -44,4 +45,4 @@ streamlink <url> best -O | ffmpeg -i - -f rawvideo - | ./kpdec -s 1000x562 -q 6 
 
 ## Acknowledgement
 
-(lvdo)[https://github.com/m13253/lvdo]
+[lvdo](https://github.com/m13253/lvdo)
