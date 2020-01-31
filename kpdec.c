@@ -15,6 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <unistd.h>
 #include <fftw3.h>
 #include <glib.h>
 #include <math.h>
@@ -59,6 +60,7 @@ int kp_dispatch(FILE *fi, FILE *fo, unsigned int bsize, unsigned int quantizer, 
             kp_dec_frame(payload, payloadlen/2, frameuv, bsize, quantizer, qmin, qmax, width/2, height, verbose,perm2);
             fwrite(payload, 1, payloadlen/2, fo);
         }
+		sleep(0.02);
     }
     g_free(payload); g_free(framey); 
     g_free(perm1); g_free(perm2);
@@ -66,6 +68,10 @@ int kp_dispatch(FILE *fi, FILE *fo, unsigned int bsize, unsigned int quantizer, 
 }
 
 static void kp_dec_frame(unsigned char *payload, size_t payloadlen, const unsigned char *frame, unsigned int bsize, unsigned int quantizer, unsigned int qmin, unsigned int qmax, unsigned int width, unsigned int height, int verbose,int *perm) {
+    
+ 
+
+    
     for(int i=0;i<payloadlen;i++){
         payload[i]=frame[i];
     } 
@@ -79,11 +85,11 @@ static void kp_dec_frame(unsigned char *payload, size_t payloadlen, const unsign
         int obj=perm[cur]%perm_width;
         cur++;
 
-        for(int i = 0; i < bsize; i++)
-        for(int j = 0; j < bsize; j++){
-            int pos=(bi*bsize+i)*width+(bj*bsize+j);
-            int npos=(obi*bsize+i)*width+(obj*bsize+j);
-            payload[npos]=frame[pos];
+        for(int i = 0; i < bsize; i++){
+            memcpy(payload+(obi*bsize+i)*width+(obj*bsize),
+                    frame+(bi*bsize+i)*width+(bj*bsize),
+                    bsize);
+                    
         }
     }
 }
