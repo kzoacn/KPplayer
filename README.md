@@ -1,5 +1,15 @@
 # KPplayer
 
+KPplayer是一个带混淆的推流/拉流工具,原理为打乱每一帧的像素
+
+中文使用教程请参见/windows/使用教程.txt
+
+KPplayer is an obscure streaming player/publisher.
+
+The publisher random shuffle pixels on each frame.
+
+The player reshuffle pixels to recover frames.
+
 ## Requirements
 
 [ffmpeg](https://ffmpeg.org/)
